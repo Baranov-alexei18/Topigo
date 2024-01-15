@@ -1,5 +1,7 @@
 <template>
-  <Tutorial/>
+  <div>
+    <CardsView />
+  </div>
 </template>
 
 <script>
