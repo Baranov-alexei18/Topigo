@@ -21,13 +21,6 @@ export default {
     },
   },
   methods: {
-    addTodo(e) {
-      this.$store.commit("posts/add", e.target.value);
-      e.target.value = "";
-    },
-    ...mapMutations({
-      toggle: "posts/toggle",
-    }),
   },
 };
 </script>
