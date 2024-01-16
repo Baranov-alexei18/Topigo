@@ -11,8 +11,8 @@ export const state = () => ({
     img: 'https://d-russia.ru/wp-content/uploads/2023/09/deg.jpg',
     date: new Date(2023,12,10),
     comment: [{
-        content: "content_comment",
-        review: [],
+        content: "Отзыв №1",
+        review: ["Комментарий на отзыв №1"],
         }]
     },   
     {
@@ -56,9 +56,13 @@ export const state = () => ({
   })
 
   export const mutations = {
-    addNewReview(state, text) {
-      state.posts.review.push({
-        content_review: text,
-      })
+    addNewComment(state, comment) {
+        state.posts[comment.id - 1].comment.review.push(comment.newComment);
+    },
+    setNewReview(state, post){
+        state.posts[post.id - 1].comment.push({
+            content: post.newComment,
+            review: [],
+        })
     },
   }

@@ -21,18 +21,34 @@
         </div>
       </div>
       <div v-for="item in item.comment" :key="item">
-        <div
-          v-if="item.content"
-          class="flex bg-slate-100 h-20 overflow-hidden shadow sm:rounded-lg bg-slate-50 mb-2"
-        >
-          {{ item.content }}
+        <div v-if="item.content" class="py-2 mb-2">
+          <div
+            class="flex bg-slate-100 min-h-10 overflow-hidden shadow sm:rounded-lg bg-slate-50 mb-2 pl-2"
+          >
+            {{ item.content }}
+          </div>
+          <div class="flex">
+            <button
+              class="rounded-lg ring-2 ring-green-400 ml-auto px-2 h-7"
+              @click="addNewComment(item.id)"
+            >
+              Написать комментарий
+            </button>
+          </div>
         </div>
       </div>
-      
-      <div class="flex justify-items-end h-10 mb-5">
-        <input class="rounded-lg ring-2 ring-blue-500" type="text" v-model="newComment" />
-        <button class="rounded-lg ring-2 ring-blue-500 ml-auto" @click="checkWriteComment = true">
-          Написать комментарий
+
+      <div class="flex justify-items-end h-10 my-8">
+        <input
+          class="w-3/4 rounded-lg ring-2 ring-blue-500"
+          type="text"
+          v-model="newComment[item.id]"
+        />
+        <button
+          class="rounded-lg ring-2 ring-blue-500 ml-auto px-2"
+          @click="setNewReview(item.id)"
+        >
+          Оставить отзыв
         </button>
       </div>
     </div>
@@ -44,14 +60,24 @@ export default {
   props: ["posts"],
   data() {
     return {
-        checkWriteComment: false,
-        newComment: "",
-    }
+      checkWriteComment: false,
+      newComment: [],
+      newReview: [],
+    };
   },
 
   methods: {
     toPost() {
       this.$router.push("/post");
+    },
+
+    setNewReview(id) {
+      let newComment = this.newComment[id];
+      this.$store.commit("posts/setNewReview", { id, newComment });
+      this.newComment[id] = "";
+    },
+    addNewComment(id) {
+      this.$store.commit("posts/addNewComment", { id, newComment });
     },
   },
 };
