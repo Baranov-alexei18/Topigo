@@ -9,17 +9,17 @@ export const state = () => ({
     + "вариант ответа. Соцсети оценят, если подписчики будут хорошо реагировать на ваши посты, комментировать, участвовать" 
     + "в опросах и голосованиях. Это значит, что паблик интересный и ваши посты можно ранжировать повыше в ленте.",
     img: 'https://d-russia.ru/wp-content/uploads/2023/09/deg.jpg',
-    date: new Date(2023,12,10),
-    comment: [{
+    date: new Date(2023,11,10),
+    review: [{
         content: "Отзыв №1",
-        review: ["Комментарий на отзыв №1"],
+        comment: ["Комментарий на отзыв №1"],
         }]
     },   
     {
         id: 2,  
         title: 'Тигрёнок и его друзья',  
         desc: " Тигрёнок и его друзья- это довольно известный мультфильм, главный герой которого-Тигрёнок.",
-        content: "Тигрёнок и его друзья- это довольно известный мультфильм, главный герой которого-Тигрёнок."
+        contents: "Тигрёнок и его друзья- это довольно известный мультфильм, главный герой которого-Тигрёнок."
         + "Мультфильм небольшой: всего 3 серии, но они очень хорошо сформированы, как в плане сюжета,"
         + "так и в плане персонажей. Детям этот мультфильм нравится, так как там добрый мультик, играются звери, поют песенки. Взрослым, часто он тоже  " 
         + " нравится, особенно тем, кто родился ещё в СССР, и смотрел его по телевидению."
@@ -30,9 +30,9 @@ export const state = () => ({
         + "Друзья не расстраиваются и пробуют выступить сами вместо птички. Сначала птичкой был Тигрёнок, потом Обезьянка, но на снимке все получались полосатыми или ушастыми, а оттого — грустными. ",
         img: 'https://pikuco.ru/upload/test_stable/ee4/ee4aa5961a039ca5e2c6f8f99d415e75.webp',
         date: new Date(2017,8, 15),
-        comment: [{
-            content: "",
-            review: [],
+        review: [{
+            content: "Отзыв №2",
+            comment: ["Комментарий на отзыв №2"],
             }]
         },
     {
@@ -47,9 +47,9 @@ export const state = () => ({
         + "/ ***Конец***/",
     img: 'https://nukadeti.ru/content/images/static/tale400x400/267_288.jpg',
     date: new Date(2020,5,5),
-    comment: [{
-        content: "",
-        review: [],
+    review: [{
+        content: "Отзыв №3",
+        comment: ["Комментарий на отзыв №3"],
         }]
     },   
     ]
@@ -57,12 +57,15 @@ export const state = () => ({
 
   export const mutations = {
     addNewComment(state, comment) {
-        state.posts[comment.id - 1].comment.review.push(comment.newComment);
+        console.log(comment);
+        console.log(state.posts[comment.id - 1].review);
+        state.posts[comment.id - 1].review[0].comment.push(comment.comment);
     },
-    setNewReview(state, post){
-        state.posts[post.id - 1].comment.push({
-            content: post.newComment,
-            review: [],
+
+    addNewReview(state, review){
+        state.posts[review.id - 1].review.push({
+            content: review.newReview,
+            comment: [],
         })
     },
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="container flex pt-5 bg-gray-200">
+  <div class="min-h-screen flex pt-5 bg-gray-200">
     <div class="flex w-20 justify-items-start items-start">
       <button
         type="button"
@@ -21,37 +21,64 @@
       </button>
     </div>
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-      <p class="relative flex items-top justify-center text-5xl mb-4">TITLE</p>
+      <p class="relative flex items-top justify-center text-5xl mb-4">{{post.title}}</p>
       <div class="flex min-w-44 w-2/3 mx-auto">
         <img
           class="min-h-40 mx-auto"
-          src="https://media.4-paws.org/5/b/4/b/5b4b5a91dd9443fa1785ee7fca66850e06dcc7f9/VIER%20PFOTEN_2019-12-13_209-2890x2000-1920x1329.jpg"
+          :src="post.img"
           alt="Cats"
         />
       </div>
-      <div class="relative flex items-top text-xl mt-4">asdfasdfklj</div>
+      <div class="relative flex items-top text-xl mt-4">{{post.contents}}</div>
 
       <div class="flex items-center my-3">
         <div class="text-2xl mr-2">Дата публикации: </div>
         <pre></pre>
-        <div class="text-2xl">  asd fasdfklj</div>
+        <div class="text-2xl">{{getDatePost}}</div>
       </div>
 
-      <div class="border-t-4 border-black">
-
-      </div>
     </div>
   </div>
 </template>
   
-  <script>
+<script>
 export default {
   name: "postPage",
-  methods:{
-    toHomePage(){
-      this.$router.push("/")
+  data() {
+    return {
+      post: {},
+    };
+  },
+
+  computed:{
+    getDatePost(){
+      let date = new Date(this.post.date)
+      let year = date.getFullYear();
+      let month = date.getMonth();
+      let day = date.getDate();
+      return `${day}.${month}.${year}`
     }
-  }
+  },
+
+  mounted() {
+    let post_id = this.$route.params.id;
+    this.post = this.$store.state.posts.posts.find((item) => item.id == post_id);
+  },
+
+  methods: {
+    toHomePage() {
+      this.$router.push("/");
+    },
+    getPost() {
+      let post_id = this.$route.params.id;
+      let post = this.$store.state.posts.posts.map(
+        (item) => item.id == post_id
+      );
+      console.log(post);
+      return post;
+    },
+    
+  },
 };
 </script>
   
