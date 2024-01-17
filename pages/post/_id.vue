@@ -21,22 +21,23 @@
       </button>
     </div>
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-      <p class="relative flex items-top justify-center text-5xl mb-4">{{post.title}}</p>
+      <p class="relative flex items-top justify-center text-5xl mb-4">
+        {{ post.title }}
+      </p>
       <div class="flex min-w-44 w-2/3 mx-auto">
-        <img
-          class="min-h-40 mx-auto"
-          :src="post.img"
-          alt="Cats"
-        />
+        <img class="min-h-40 mx-auto" :src="post.img" alt="Cats" />
       </div>
-      <div class="relative flex items-top text-xl mt-4">{{post.contents}}</div>
+      <div class="relative flex items-top text-xl mt-4">
+        {{ post.contents }}
+      </div>
 
       <div class="flex items-center my-3">
-        <div class="text-2xl mr-2">Дата публикации: </div>
+        <div class="text-2xl mr-2">Дата публикации:</div>
         <pre></pre>
-        <div class="text-2xl">{{getDatePost}}</div>
+        <div class="text-2xl">{{ getDatePost }}</div>
       </div>
-
+      <p>-----Review------</p>
+      <Review :post-review="post" />
     </div>
   </div>
 </template>
@@ -50,19 +51,21 @@ export default {
     };
   },
 
-  computed:{
-    getDatePost(){
-      let date = new Date(this.post.date)
+  computed: {
+    getDatePost() {
+      let date = new Date(this.post.date);
       let year = date.getFullYear();
       let month = date.getMonth();
       let day = date.getDate();
-      return `${day}.${month}.${year}`
-    }
+      return `${day}.${month}.${year}`;
+    },
   },
 
   mounted() {
     let post_id = this.$route.params.id;
-    this.post = this.$store.state.posts.posts.find((item) => item.id == post_id);
+    this.post = this.$store.state.posts.posts.find(
+      (item) => item.id == post_id
+    );
   },
 
   methods: {
@@ -77,7 +80,6 @@ export default {
       console.log(post);
       return post;
     },
-    
   },
 };
 </script>

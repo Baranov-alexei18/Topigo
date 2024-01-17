@@ -58,8 +58,7 @@ export const state = () => ({
   export const mutations = {
     addNewComment(state, comment) {
         console.log(comment);
-        console.log(state.posts[comment.id - 1].review);
-        state.posts[comment.id - 1].review[0].comment.push(comment.comment);
+        state.posts[comment.post_id - 1].review[comment.comment_id].comment.push(comment.comment);
     },
 
     addNewReview(state, review){
